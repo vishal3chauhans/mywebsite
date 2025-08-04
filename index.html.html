@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreshBite - Home Food Delivery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #fffaf4;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+    header {
+      background-color: #ff7043;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      margin-left: 1.5rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      padding: 2rem;
+    }
+    .hero {
+      background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') center/cover no-repeat;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    footer {
+      background-color: #ff7043;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+    .alert {
+      background-color: #ffe0b2;
+      color: #bf360c;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      display: none;
+    }
+    .dark-mode {
+      background-color: #2e2e2e;
+      color: #f5f5f5;
+    }
+    .dark-mode header,
+    .dark-mode footer {
+      background-color: #424242;
+    }
+    .dark-mode .alert {
+      background-color: #555;
+      color: #ffab91;
+    }
+    #toggleMode {
+      margin-left: 1rem;
+      padding: 0.4rem 0.8rem;
+      background: white;
+      color: #ff7043;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .clock {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+    }
+    form input, form textarea {
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    form button {
+      background-color: #ff7043;
+      color: white;
+      border: none;
+      padding: 0.6rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>FreshBite</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+      <button id="toggleMode">Toggle Dark Mode</button>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div>Delicious Homemade Meals Delivered to Your Door</div>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>FreshBite connects you with talented home chefs in your city to bring you healthy, freshly cooked meals straight to your doorstep. No preservatives, no stress — just delicious food made with love.</p>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <ul>
+      <li>Daily meal delivery</li>
+      <li>Custom diet meals</li>
+      <li>Family meal packages</li>
+      <li>Party and event orders</li>
+    </ul>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1" alt="Meal 1" onclick="enlargeImage(this.src)">
+      <img src="https://images.unsplash.com/photo-1606788075761-261e6c1b7295" alt="Meal 2" onclick="enlargeImage(this.src)">
+      <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb36" alt="Meal 3" onclick="enlargeImage(this.src)">
+    </div>
+    <div class="alert" id="alertBox">You clicked the gallery section!</div>
+    <button onclick="showAlert()">Click for Surprise</button>
+    <div class="clock" id="clock"></div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form onsubmit="return validateForm()">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 FreshBite. All rights reserved.
+  </footer>
+
+  <script>
+    function showAlert() {
+      const alertBox = document.getElementById('alertBox');
+      alertBox.style.display = 'block';
+      setTimeout(() => {
+        alertBox.style.display = 'none';
+      }, 3000);
+    }
+
+    function enlargeImage(src) {
+      const img = document.createElement('img');
+      img.src = src;
+      img.style.position = 'fixed';
+      img.style.top = '50%';
+      img.style.left = '50%';
+      img.style.transform = 'translate(-50%, -50%)';
+      img.style.maxWidth = '90%';
+      img.style.maxHeight = '90%';
+      img.style.border = '5px solid white';
+      img.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.6)';
+      img.style.zIndex = 9999;
+      img.style.background = 'white';
+      img.onclick = () => document.body.removeChild(img);
+      document.body.appendChild(img);
+    }
+
+    document.getElementById('toggleMode').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    function updateClock() {
+      const clock = document.getElementById('clock');
+      const now = new Date();
+      const greeting = now.getHours() < 12 ? 'Good Morning!' : now.getHours() < 18 ? 'Good Afternoon!' : 'Good Evening!';
+      clock.textContent = greeting + ' Current Time: ' + now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function validateForm() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if (!name || !email || !message) {
+        alert('Please fill out all fields.');
+        return false;
+      }
+      alert('Message sent! Thank you.');
+      return false;
+    }
+  </script>
+</body>
+</html>
